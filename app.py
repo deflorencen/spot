@@ -5,7 +5,7 @@ from pages.auth.login_page import LoginPage
 from pages.auth.signup_page import SignUpPage
 
 from components.search import SearchComponent
-from components.content import ContentComponents
+from components.content import ContentComponent
 
 class Application:
     def __init__(self, page: Page):
@@ -14,7 +14,7 @@ class Application:
         self.home_page = HomePage(page)
 
         self.search = SearchComponent(page)
-        # self.content = ContentComponents(page)
+        self.content = ContentComponent(page)
 
         # LOW PRIORITY
         # self.sidebar = SidebarComponent(page)
