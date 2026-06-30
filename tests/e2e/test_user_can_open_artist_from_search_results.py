@@ -46,7 +46,7 @@ def test_album_loading_server_error_handling(app):
     def handle_route(route):
         try:
             request_body = json.loads(route.request.post_data)
-            operation_name = request_body.get("operationName") or ""
+            operation_name = request_body.get("operationName")
         except (json.JSONDecodeError, TypeError):
             operation_name = None
 
@@ -56,7 +56,7 @@ def test_album_loading_server_error_handling(app):
             route.continue_()
 
     app.page.route(
-        "https://api-partner.spotify.com/pathfinder/v2/query",
+        "**/pathfinder/v2/query",
         handle_route
     )
 
@@ -65,3 +65,15 @@ def test_album_loading_server_error_handling(app):
     app.content.open_artist("Kendrick Lamar")
     app.content.open_album("DAMN.")
     expect(app.content.track_row).to_have_count(0)
+
+
+def test_top_result_content(app):
+    app.home_page.open()
+    app.search.type_query("Kendrick")
+
+    expect(app.top_result_component.top_result_card).to_be_visible()
+    
+    expect(app.top_result_component.play_button).to_be_visible()
+    expect(app.top_result_component.click_top_result_card).to_be_visible()
+    expect(app.top_result_component.top_result_card_image).to_be_visible()
+    expect(app.top_result_component.top_result_card_text).to_be_visible()

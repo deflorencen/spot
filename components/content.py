@@ -8,6 +8,7 @@ class ContentComponent:
 
         self.album_title = page.get_by_test_id("entityTitle")
         self.track_row = page.get_by_test_id("tracklist-row")
+        self.grid_container = page.get_by_test_id("grid-container")
 
     def artist_link(self, artist_name: str) -> Locator:
         return (
