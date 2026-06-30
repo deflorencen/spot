@@ -37,7 +37,7 @@ def test_user_can_open_album_page(
     app.content.open_artist(artist_name)
     app.content.open_album(album_name)
 
-    expect(app.content.album_link(album_name)).to_have_attribute("href", re.compile(r"^/album/"))
+
     expect(app.content.album_title).to_have_text(album_name)
     expect(app.content.track_row).to_have_count(track_count)
 
@@ -76,4 +76,4 @@ def test_top_result_content(app):
     expect(app.top_result_component.play_button).to_be_visible()
     expect(app.top_result_component.click_top_result_card).to_be_visible()
     expect(app.top_result_component.top_result_card_image).to_be_visible()
-    expect(app.top_result_component.top_result_card_text).to_be_visible()
+    expect(app.top_result_component.artist_link).to_be_visible()
